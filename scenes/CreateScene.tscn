@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/CreateScene.gd" type="Script" id=1]
+[ext_resource path="res://basic_theme.tres" type="Theme" id=2]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,6 +11,7 @@ script = ExtResource( 1 )
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
 anchor_right = 1.0
@@ -25,150 +27,147 @@ margin_right = -10.0
 margin_bottom = -10.0
 
 [node name="Col1" type="VBoxContainer" parent="CanvasLayer/Control/HBox"]
-margin_right = 242.0
+margin_right = 239.0
 margin_bottom = 580.0
 
 [node name="RealTime" type="CheckBox" parent="CanvasLayer/Control/HBox/Col1"]
-margin_right = 242.0
-margin_bottom = 24.0
+margin_right = 239.0
+margin_bottom = 25.0
 text = "Enable real-time typo detection"
 
 [node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 28.0
-margin_right = 242.0
-margin_bottom = 32.0
+margin_top = 29.0
+margin_right = 239.0
+margin_bottom = 33.0
 
 [node name="LineCount" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 36.0
-margin_right = 242.0
-margin_bottom = 60.0
+margin_top = 37.0
+margin_right = 239.0
+margin_bottom = 64.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Col1/LineCount"]
 margin_top = 5.0
-margin_right = 164.0
-margin_bottom = 19.0
+margin_right = 137.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "How many times?"
 
 [node name="SpinBox" type="SpinBox" parent="CanvasLayer/Control/HBox/Col1/LineCount"]
-margin_left = 168.0
-margin_right = 242.0
-margin_bottom = 24.0
+margin_left = 141.0
+margin_right = 239.0
+margin_bottom = 27.0
 min_value = 1.0
 value = 1.0
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 64.0
-margin_right = 242.0
-margin_bottom = 68.0
+margin_top = 68.0
+margin_right = 239.0
+margin_bottom = 72.0
 
 [node name="AddCount" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 72.0
-margin_right = 242.0
-margin_bottom = 103.0
+margin_top = 76.0
+margin_right = 239.0
+margin_bottom = 113.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Col1/AddCount"]
-margin_right = 164.0
-margin_bottom = 31.0
+margin_right = 137.0
+margin_bottom = 37.0
 size_flags_horizontal = 3
 text = "Lines to add for mistakes: "
 autowrap = true
 
 [node name="SpinBox" type="SpinBox" parent="CanvasLayer/Control/HBox/Col1/AddCount"]
-margin_left = 168.0
-margin_right = 242.0
-margin_bottom = 31.0
+margin_left = 141.0
+margin_right = 239.0
+margin_bottom = 37.0
 
 [node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 107.0
-margin_right = 242.0
-margin_bottom = 111.0
+margin_top = 117.0
+margin_right = 239.0
+margin_bottom = 121.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 115.0
-margin_right = 242.0
-margin_bottom = 129.0
+margin_top = 125.0
+margin_right = 239.0
+margin_bottom = 162.0
 size_flags_horizontal = 3
 text = "If the submissive attempts to cheat: "
 autowrap = true
 
 [node name="AddOrig" type="CheckBox" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 133.0
-margin_right = 242.0
-margin_bottom = 157.0
+margin_top = 166.0
+margin_right = 239.0
+margin_bottom = 191.0
 text = "Add original amount to remaining"
 
 [node name="CheatMode" type="GridContainer" parent="CanvasLayer/Control/HBox/Col1"]
-margin_top = 161.0
-margin_right = 242.0
-margin_bottom = 213.0
+margin_top = 195.0
+margin_right = 239.0
+margin_bottom = 253.0
 columns = 2
 
 [node name="Add" type="CheckBox" parent="CanvasLayer/Control/HBox/Col1/CheatMode"]
-margin_right = 164.0
-margin_bottom = 24.0
+margin_right = 137.0
+margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "Add:"
 
 [node name="CheatAdd" type="SpinBox" parent="CanvasLayer/Control/HBox/Col1/CheatMode"]
-margin_left = 168.0
-margin_right = 242.0
-margin_bottom = 24.0
+margin_left = 141.0
+margin_right = 239.0
+margin_bottom = 27.0
 min_value = 1.0
 value = 1.0
 
 [node name="MultiplyBy" type="CheckBox" parent="CanvasLayer/Control/HBox/Col1/CheatMode"]
-margin_top = 28.0
-margin_right = 164.0
-margin_bottom = 52.0
+margin_top = 31.0
+margin_right = 137.0
+margin_bottom = 58.0
 text = "Multiply by:"
 
 [node name="CheatMult" type="SpinBox" parent="CanvasLayer/Control/HBox/Col1/CheatMode"]
-margin_left = 168.0
-margin_top = 28.0
-margin_right = 242.0
-margin_bottom = 52.0
+margin_left = 141.0
+margin_top = 31.0
+margin_right = 239.0
+margin_bottom = 58.0
 min_value = 1.1
 step = 0.1
 value = 1.1
 
 [node name="Col2" type="VBoxContainer" parent="CanvasLayer/Control/HBox"]
-margin_left = 246.0
+margin_left = 243.0
 margin_right = 1004.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PassLine" type="LineEdit" parent="CanvasLayer/Control/HBox/Col2"]
-margin_right = 758.0
-margin_bottom = 24.0
-text = "Pass"
-placeholder_text = "Passphrase"
+margin_right = 761.0
+margin_bottom = 27.0
+placeholder_text = "Completion Message"
 
 [node name="InputLines" type="TextEdit" parent="CanvasLayer/Control/HBox/Col2"]
-margin_top = 28.0
-margin_right = 758.0
-margin_bottom = 556.0
+margin_top = 31.0
+margin_right = 761.0
+margin_bottom = 553.0
 size_flags_vertical = 3
-text = "This is a line.
-This is a second line.
-This is a \"third\" line."
 wrap_enabled = true
 
 [node name="Buttons" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Col2"]
-margin_top = 560.0
-margin_right = 758.0
+margin_top = 557.0
+margin_right = 761.0
 margin_bottom = 580.0
 
 [node name="PackButton" type="Button" parent="CanvasLayer/Control/HBox/Col2/Buttons"]
-margin_right = 377.0
-margin_bottom = 20.0
+margin_right = 378.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
+disabled = true
 text = "Pack Data"
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/Control/HBox/Col2/Buttons"]
-margin_left = 381.0
-margin_right = 758.0
-margin_bottom = 20.0
+margin_left = 382.0
+margin_right = 761.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "Exit"

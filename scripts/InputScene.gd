@@ -8,7 +8,7 @@ onready var rtl				= col1.get_node("rtl")
 onready var input_text 		= col2.get_node("InputText")
 onready var console 		= col2.get_node("Console")
 
-var passphrase = ""
+var message = ""
 var line_index = 0
 var lines = ["This is a ridiculously long line that I will expect my submissive to write because I am a terrible person that wants to see them suffer more than anything in the world like a true sadistic freak of nature. Unfortunately for that submissive, I have no mercy when she crosses a line."]
 var count = 100
@@ -42,7 +42,7 @@ func _ready():
 	add_on_cheat 	= int(pack[Global.CHEATADD_KEY])
 	mult_on_cheat   = pack[Global.CHEATMLT_KEY]
 	cheat_mode		= int(pack[Global.CHEATMODE_KEY])
-	passphrase 		= pack[Global.PASS_KEY]
+	message 		= pack[Global.MSG_KEY]
 	lines 			= pack[Global.LINES_KEY]
 
 	remain = count
@@ -100,6 +100,10 @@ func _on_text_entered(new_text: String):
 
 	input_text.text = ""
 	_draw_prompt()
+
+	if remain <= 0:
+		Global.dom_message = message
+		get_tree().change_scene("res://scenes/LinesComplete.tscn")
 
 func _on_mistake():
 	remain += add_on_typo

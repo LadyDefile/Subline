@@ -1,10 +1,11 @@
 extends Node
 
 var text_code = ""
+var dom_message = ""
 const ENC_KEY = "MistakesWereMade"
 
 const LINES_KEY = "lines"
-const PASS_KEY = "passphrase"
+const MSG_KEY = "message"
 const REALTIME_KEY = "realtime"
 const MISTAKE_KEY = "add_on_mistake"
 const CHEATADD_KEY = "add_on_cheat"

@@ -19,19 +19,24 @@ onready var pack_button = col2.get_node("Buttons/PackButton")
 onready var exit_button = col2.get_node("Buttons/ExitButton")
 
 func _ready():
-	pack_button.connect("pressed", self, "on_press", [pack_button])
-	exit_button.connect("pressed", self, "on_press", [exit_button])
+	pass_text.connect("text_changed", self, "_on_text_changed")
+	line_text.connect("text_changed", self, "_on_text_changed", [""])
+	pack_button.connect("pressed", self, "_on_press", [pack_button])
+	exit_button.connect("pressed", self, "_on_press", [exit_button])
+
+func _on_text_changed(_text: String):
+	pack_button.disabled = pass_text.text.length() == 0 or line_text.text.length() == 0
 	
-func on_press(button: Button):
+func _on_press(button: Button):
 	if button == pack_button:
-		var pack = Global.encryt_string(dump())
+		var pack = Global.encryt_string(_dump())
 		Global.text_code = pack;
 		line_text.text = pack
 
 	elif button == exit_button:
 		var _x = get_tree().change_scene("res://scenes/RoleScene.tscn")
 
-func dump():
+func _dump():
 	var result = {}
 	result[Global.REALTIME_KEY] = realtime.pressed
 	result[Global.COUNT_KEY] = line_count.value
@@ -49,7 +54,7 @@ func dump():
 	if cheat_mode_mult.pressed:
 		result[Global.CHEATMODE_KEY] |= Global.CHEATMODE_MULT
 
-	result[Global.PASS_KEY] = pass_text.text
+	result[Global.MSG_KEY] = pass_text.text
 	result[Global.LINES_KEY] = line_text.text.split("\n", false)
 	
 	return JSON.print(result)
