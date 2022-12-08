@@ -2,6 +2,8 @@ extends Node
 
 var text_code = ""
 var dom_message = ""
+var font_selection = "staypuft"
+
 const ENC_KEY = "MistakesWereMade"
 
 const LINES_KEY = "lines"
