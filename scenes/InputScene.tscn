@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/InputScene.gd" type="Script" id=1]
 [ext_resource path="res://basic_theme.tres" type="Theme" id=2]
 
-[node name="Node2D" type="Node2D"]
+[node name="InputScene" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -28,77 +28,121 @@ margin_bottom = -10.0
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control/VBox"]
 margin_right = 1004.0
-margin_bottom = 37.0
+margin_bottom = 39.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBox/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 997.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/VBox/PanelContainer/HBoxContainer"]
+[node name="HeaderLabel" type="Label" parent="CanvasLayer/Control/VBox/PanelContainer/HBoxContainer"]
 margin_top = 3.0
-margin_right = 940.0
-margin_bottom = 20.0
+margin_right = 936.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
+text = "Subline - Text Entry"
 
 [node name="BackButton" type="Button" parent="CanvasLayer/Control/VBox/PanelContainer/HBoxContainer"]
-margin_left = 944.0
+margin_left = 940.0
 margin_right = 990.0
-margin_bottom = 23.0
+margin_bottom = 25.0
 text = "Back"
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/Control/VBox"]
-margin_top = 41.0
+[node name="ExitButton" type="Button" parent="CanvasLayer/Control/VBox/PanelContainer/HBoxContainer"]
+visible = false
+margin_left = 945.0
+margin_right = 990.0
+margin_bottom = 25.0
+text = "Exit"
+
+[node name="EntryPage" type="HBoxContainer" parent="CanvasLayer/Control/VBox"]
+margin_top = 43.0
 margin_right = 1004.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Split" type="HSplitContainer" parent="CanvasLayer/Control/VBox/HBox"]
+[node name="Split" type="HSplitContainer" parent="CanvasLayer/Control/VBox/EntryPage"]
 margin_right = 1004.0
-margin_bottom = 539.0
+margin_bottom = 537.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Col1" type="PanelContainer" parent="CanvasLayer/Control/VBox/HBox/Split"]
+[node name="Col1" type="PanelContainer" parent="CanvasLayer/Control/VBox/EntryPage/Split"]
 margin_right = 164.0
-margin_bottom = 539.0
+margin_bottom = 537.0
 
-[node name="rtl" type="RichTextLabel" parent="CanvasLayer/Control/VBox/HBox/Split/Col1"]
+[node name="rtl" type="RichTextLabel" parent="CanvasLayer/Control/VBox/EntryPage/Split/Col1"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 157.0
-margin_bottom = 532.0
+margin_bottom = 530.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_vertical = 3
 bbcode_enabled = true
 
-[node name="Col2" type="VBoxContainer" parent="CanvasLayer/Control/VBox/HBox/Split"]
+[node name="Col2" type="VBoxContainer" parent="CanvasLayer/Control/VBox/EntryPage/Split"]
 margin_left = 176.0
 margin_right = 1004.0
-margin_bottom = 539.0
+margin_bottom = 537.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Console" type="RichTextLabel" parent="CanvasLayer/Control/VBox/HBox/Split/Col2"]
+[node name="Console" type="RichTextLabel" parent="CanvasLayer/Control/VBox/EntryPage/Split/Col2"]
 margin_right = 828.0
-margin_bottom = 508.0
+margin_bottom = 504.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
 scroll_following = true
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/VBox/HBox/Split/Col2/Console"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/VBox/EntryPage/Split/Col2/Console"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.12549, 0.12549, 0.12549, 1 )
 
-[node name="InputText" type="LineEdit" parent="CanvasLayer/Control/VBox/HBox/Split/Col2"]
-margin_top = 512.0
+[node name="InputText" type="LineEdit" parent="CanvasLayer/Control/VBox/EntryPage/Split/Col2"]
+margin_top = 508.0
 margin_right = 828.0
-margin_bottom = 539.0
+margin_bottom = 537.0
 context_menu_enabled = false
 virtual_keyboard_enabled = false
 shortcut_keys_enabled = false
+
+[node name="ResultPage" type="PanelContainer" parent="CanvasLayer/Control/VBox"]
+visible = false
+margin_top = 313.0
+margin_right = 1004.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/VBox/ResultPage"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 997.0
+margin_bottom = 260.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBox/ResultPage/VBox"]
+margin_right = 990.0
+margin_bottom = 19.0
+text = "Congratulations on completing all of your sentences."
+align = 1
+autowrap = true
+
+[node name="Center" type="CenterContainer" parent="CanvasLayer/Control/VBox/ResultPage/VBox"]
+margin_top = 23.0
+margin_right = 990.0
+margin_bottom = 253.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DomLabel" type="Label" parent="CanvasLayer/Control/VBox/ResultPage/VBox/Center"]
+margin_left = 427.0
+margin_top = 98.0
+margin_right = 563.0
+margin_bottom = 131.0
+theme_type_variation = "LargeLabel"
+text = "Good job!"

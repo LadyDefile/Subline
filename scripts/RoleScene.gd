@@ -6,6 +6,9 @@ onready var opt_button = get_node("CanvasLayer/Control/Center/Panel/VBox/OptButt
 onready var con = get_node("CanvasLayer/Control") as Control
 
 func _ready():
+	Global.initialize_folder_structure()
+	Global.load_config()
+
 	dom_button.connect("pressed", self, "_on_button_pressed", [dom_button])
 	sub_button.connect("pressed", self, "_on_button_pressed", [sub_button])
 	opt_button.connect("pressed", self, "_on_button_pressed", [opt_button])
@@ -20,7 +23,7 @@ func _on_button_pressed(button):
 		path = "res://scenes/CodeEntry.tscn"
 
 	elif button == opt_button:
-		path = "res://scenes/Settings.tscn"
+		path = "res://scenes/Options.tscn"
 
 	else:
 		return

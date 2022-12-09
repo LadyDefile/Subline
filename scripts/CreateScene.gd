@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var col1 = get_node("CanvasLayer/Control/HBox/Col1")
-onready var col2 = get_node("CanvasLayer/Control/HBox/Col2")
+onready var col1 = get_node("CanvasLayer/Control/VBoxContainer/HBox/Col1")
+onready var col2 = get_node("CanvasLayer/Control/VBoxContainer/HBox/Col2")
 
 onready var realtime = col1.get_node("RealTime")
 onready var line_count = col1.get_node("LineCount/SpinBox")
@@ -13,25 +13,29 @@ onready var cheat_add = col1.get_node("CheatMode/CheatAdd")
 onready var cheat_mode_mult = col1.get_node("CheatMode/MultiplyBy")
 onready var cheat_mult = col1.get_node("CheatMode/CheatMult")
 
-onready var pass_text = col2.get_node("PassLine")
+onready var message_text = col2.get_node("PassLine")
 onready var line_text = col2.get_node("InputLines")
-onready var pack_button = col2.get_node("Buttons/PackButton")
-onready var exit_button = col2.get_node("Buttons/ExitButton")
+onready var pack_button = col2.get_node("PackButton")
+onready var exit_button = get_node("CanvasLayer/Control/VBoxContainer/PanelContainer/HBoxContainer/BackButton")
+
+onready var output_frame = get_node("CanvasLayer/Control/VBoxContainer/HBox/Col2/CodeOutput")
+onready var output_text = output_frame.get_node("VBox/TextEdit")
 
 func _ready():
-	pass_text.connect("text_changed", self, "_on_text_changed")
-	line_text.connect("text_changed", self, "_on_text_changed", [""])
+	line_text.connect("text_changed", self, "_on_text_changed")
 	pack_button.connect("pressed", self, "_on_press", [pack_button])
 	exit_button.connect("pressed", self, "_on_press", [exit_button])
 
-func _on_text_changed(_text: String):
-	pack_button.disabled = pass_text.text.length() == 0 or line_text.text.length() == 0
+func _on_text_changed():
+	pack_button.disabled = line_text.text.length() == 0
+	output_frame.visible = false;
 	
 func _on_press(button: Button):
 	if button == pack_button:
 		var pack = Global.encryt_string(_dump())
-		Global.text_code = pack;
-		line_text.text = pack
+		Global.text_code = pack
+		output_text.text = pack
+		output_frame.visible = true
 
 	elif button == exit_button:
 		var _x = get_tree().change_scene("res://scenes/RoleScene.tscn")
@@ -54,7 +58,7 @@ func _dump():
 	if cheat_mode_mult.pressed:
 		result[Global.CHEATMODE_KEY] |= Global.CHEATMODE_MULT
 
-	result[Global.MSG_KEY] = pass_text.text
+	result[Global.MSG_KEY] = message_text.text
 	result[Global.LINES_KEY] = line_text.text.split("\n", false)
 	
 	return JSON.print(result)

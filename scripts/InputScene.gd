@@ -1,24 +1,33 @@
 extends Node2D
+onready var title_label		= get_node("CanvasLayer/Control/VBox/PanelContainer/HBoxContainer/HeaderLabel")
+onready var back_button 	= get_node("CanvasLayer/Control/VBox/PanelContainer/HBoxContainer/BackButton")
+onready var exit_button 	= get_node("CanvasLayer/Control/VBox/PanelContainer/HBoxContainer/ExitButton")
 
-onready var col1 = get_node("CanvasLayer/Control/VBox/HBox/Split/Col1")
-onready var col2 = get_node("CanvasLayer/Control/VBox/HBox/Split/Col2")
+onready var result_page		= get_node("CanvasLayer/Control/VBox/ResultPage")
+onready var entry_page 		= get_node("CanvasLayer/Control/VBox/EntryPage")
 
+onready var col1 			= entry_page.get_node("Split/Col1")
 onready var rtl				= col1.get_node("rtl")
 
+onready var col2 			= entry_page.get_node("Split/Col2")
 onready var input_text 		= col2.get_node("InputText")
 onready var console 		= col2.get_node("Console")
 
+onready var congrats_label	= result_page.get_node("VBox/Label")
+onready var dom_label		= result_page.get_node("VBox/Center/DomLabel")
+
 var message = ""
 var line_index = 0
-var lines = ["This is a ridiculously long line that I will expect my submissive to write because I am a terrible person that wants to see them suffer more than anything in the world like a true sadistic freak of nature. Unfortunately for that submissive, I have no mercy when she crosses a line."]
+var lines = []
 var count = 100
 var remain = 100
-var completed = 0
+var completed_sentences = 0
+var completed_sets = 0
 var add_on_typo = 0
 var add_on_cheat = 0
 var mult_on_cheat = 0
 var cheat_mode = 0
-var typo_count = 0
+var mistake_count = 0
 var realtime = false
 
 const GREEN = "#7CFC00"
@@ -27,7 +36,8 @@ const RED = "#FF3A3A"
 var remaining_line_color = GREEN
 
 func _ready():
-	get_node("CanvasLayer/Control/VBox/PanelContainer/HBoxContainer/BackButton").connect("pressed", self, "_on_back_pressed")
+	back_button.connect("pressed", self, "_on_pressed", [back_button])
+	exit_button.connect("pressed", self, "_on_pressed", [exit_button])
 
 	input_text.connect("gui_input", self, "_on_line_input")
 	input_text.connect("text_changed", self, "_on_text_changed")
@@ -47,13 +57,18 @@ func _ready():
 
 	remain = count
 	_draw_prompt()
+	input_text.grab_focus()
 
-func _on_back_pressed():
-	get_tree().change_scene("res://scenes/CodeEntry.tscn")
+func _on_pressed(button: Button):
+	if button == back_button:
+		get_tree().change_scene("res://scenes/CodeEntry.tscn")
+
+	elif button == exit_button:
+		get_tree().change_scene("res://scenes/RoleScene.tscn")
 
 func _draw_prompt():
 	var msg = "You have [color=%s]%d[/color] sets remaining.\n\n" % [remaining_line_color, remain]
-	msg += "You have made [color=%s]%d[/color] mistakes.\n\n" % [(GREEN if typo_count == 0 else RED), typo_count]
+	msg += "You have made [color=%s]%d[/color] mistakes.\n\n" % [(GREEN if mistake_count == 0 else RED), mistake_count]
 	msg += "There are %d different lines in each set.\n\n" % lines.size()
 	msg += "The current line is:\n%s" % lines[line_index]
 	rtl.bbcode_text = msg
@@ -103,18 +118,20 @@ func _on_text_entered(new_text: String):
 
 	if remain <= 0:
 		Global.dom_message = message
-		get_tree().change_scene("res://scenes/LinesComplete.tscn")
+		_show_results()
 
 func _on_mistake():
 	remain += add_on_typo
 	remaining_line_color = RED
-	typo_count += 1
+	mistake_count += 1
 
 func _on_success():
 	line_index += 1
+	completed_sentences += 1
 	if line_index >= lines.size():
 		line_index = 0
 		remain -= 1
+		completed_sets += 1
 	remaining_line_color = GREEN
 
 func _on_cheat():
@@ -135,3 +152,28 @@ func _out_colored(text: String, color: String):
 	var color_string = "[color={scolor}]{text}[/color]\n"
 	var formatted = color_string.format({"scolor": color, "text": text})
 	console.bbcode_text += formatted
+
+func _show_results():
+	# Hide the entry form
+	entry_page.visible = false;
+	back_button.visible = false;
+
+	# Display the result page
+	title_label.text = "Subline - Results"
+	congrats_label.text = "Congratulations! "
+	if lines.size() > 1:
+		congrats_label.text += "You completed %d sets of %d lines with " % [completed_sets, lines.size()]
+	else:
+		congrats_label.text += "You completed %d lines with " % completed_sentences
+
+	if mistake_count > 0:
+		congrats_label.text += "%d mistakes. " % mistake_count
+	else:
+		congrats_label.text += "no mistakes. "
+	
+	if message.length() > 0:
+		congrats_label.text += "\nA message to you from your Dominant(s):"
+		dom_label.text = message
+	
+	exit_button.visible = true
+	result_page.visible = true
