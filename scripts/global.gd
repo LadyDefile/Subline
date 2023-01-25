@@ -8,6 +8,7 @@ const ENC_KEY = "MistakesWereMade"
 const LINES_KEY = "lines"
 const MSG_KEY = "message"
 const REALTIME_KEY = "realtime"
+const RAND_KEY = "randomize"
 const MISTAKE_KEY = "add_on_mistake"
 const CHEATADD_KEY = "add_on_cheat"
 const CHEATMLT_KEY = "mult_on_cheat"
@@ -93,7 +94,6 @@ func get_font_list():
 		
 	return files
 	
-
 func update_font():
 	# Attempt to get the font data from the file.
 	var font_data = null

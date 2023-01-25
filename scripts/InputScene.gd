@@ -19,6 +19,7 @@ onready var dom_label		= result_page.get_node("VBox/Center/DomLabel")
 var message = ""
 var line_index = 0
 var lines = []
+var line_order = []
 var count = 100
 var remain = 100
 var completed_sentences = 0
@@ -29,6 +30,7 @@ var mult_on_cheat = 0
 var cheat_mode = 0
 var mistake_count = 0
 var realtime = false
+var randomize_order = false
 
 const GREEN = "#7CFC00"
 const RED = "#FF3A3A"
@@ -54,8 +56,10 @@ func _ready():
 	cheat_mode		= int(pack[Global.CHEATMODE_KEY])
 	message 		= pack[Global.MSG_KEY]
 	lines 			= pack[Global.LINES_KEY]
+	randomize_order = pack[Global.RAND_KEY]
 
 	remain = count
+	_randomize_set()
 	_draw_prompt()
 	input_text.grab_focus()
 
@@ -70,8 +74,23 @@ func _draw_prompt():
 	var msg = "You have [color=%s]%d[/color] sets remaining.\n\n" % [remaining_line_color, remain]
 	msg += "You have made [color=%s]%d[/color] mistakes.\n\n" % [(GREEN if mistake_count == 0 else RED), mistake_count]
 	msg += "There are %d different lines in each set.\n\n" % lines.size()
-	msg += "The current line is:\n%s" % lines[line_index]
+	msg += "The current line is:\n%s" % _get_line()
 	rtl.bbcode_text = msg
+
+func _randomize_set():
+	line_order = range(0, len(lines))
+	randomize()
+	line_order.shuffle()
+	print(line_order)
+
+func _get_line():
+	# If randomized return the line that is at the random index stored in line_order
+	if randomize_order:
+		return lines[line_order[line_index]]
+	
+	# Return the line
+	else:
+		return lines[line_index]
 	
 func _on_line_input(event: InputEvent):
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
@@ -105,7 +124,7 @@ func _on_text_entered(new_text: String):
 	if ( len(input_text.text) == 0 ):
 		return
 	
-	if lines[line_index] == new_text:
+	if _get_line() == new_text:
 		_out_colored(new_text, GREEN)
 		_on_success()
 		
@@ -117,7 +136,6 @@ func _on_text_entered(new_text: String):
 	_draw_prompt()
 
 	if remain <= 0:
-		Global.dom_message = message
 		_show_results()
 
 func _on_mistake():
@@ -132,6 +150,8 @@ func _on_success():
 		line_index = 0
 		remain -= 1
 		completed_sets += 1
+		_randomize_set()
+	
 	remaining_line_color = GREEN
 
 func _on_cheat():

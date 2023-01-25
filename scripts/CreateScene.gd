@@ -4,6 +4,7 @@ onready var col1 = get_node("CanvasLayer/Control/VBoxContainer/HBox/Col1")
 onready var col2 = get_node("CanvasLayer/Control/VBoxContainer/HBox/Col2")
 
 onready var realtime = col1.get_node("RealTime")
+onready var random_checkbox = col1.get_node("Randomize")
 onready var line_count = col1.get_node("LineCount/SpinBox")
 onready var typo_add = col1.get_node("AddCount/SpinBox")
 
@@ -43,6 +44,7 @@ func _on_press(button: Button):
 func _dump():
 	var result = {}
 	result[Global.REALTIME_KEY] = realtime.pressed
+	result[Global.RAND_KEY] = random_checkbox.pressed
 	result[Global.COUNT_KEY] = line_count.value
 	result[Global.MISTAKE_KEY] = typo_add.value
 	result[Global.CHEATADD_KEY] = cheat_add.value

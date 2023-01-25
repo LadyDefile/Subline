@@ -66,15 +66,22 @@ margin_right = 265.0
 margin_bottom = 27.0
 text = "Enable real-time typo detection"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
+[node name="Randomize" type="CheckBox" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
 margin_top = 31.0
 margin_right = 265.0
-margin_bottom = 35.0
+margin_bottom = 58.0
+hint_tooltip = "This will randomize the order of lines in each set."
+text = "Randomize Line Order"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
+margin_top = 62.0
+margin_right = 265.0
+margin_bottom = 66.0
 
 [node name="LineCount" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 39.0
+margin_top = 70.0
 margin_right = 265.0
-margin_bottom = 68.0
+margin_bottom = 99.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1/LineCount"]
 margin_top = 5.0
@@ -91,14 +98,14 @@ min_value = 1.0
 value = 1.0
 
 [node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 72.0
+margin_top = 103.0
 margin_right = 265.0
-margin_bottom = 76.0
+margin_bottom = 107.0
 
 [node name="AddCount" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 80.0
+margin_top = 111.0
 margin_right = 265.0
-margin_bottom = 121.0
+margin_bottom = 152.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1/AddCount"]
 margin_right = 163.0
@@ -113,28 +120,28 @@ margin_right = 265.0
 margin_bottom = 41.0
 
 [node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 125.0
+margin_top = 156.0
 margin_right = 265.0
-margin_bottom = 129.0
+margin_bottom = 160.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 133.0
+margin_top = 164.0
 margin_right = 265.0
-margin_bottom = 174.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 text = "If the submissive attempts to cheat: "
 autowrap = true
 
 [node name="AddOrig" type="CheckBox" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 178.0
+margin_top = 209.0
 margin_right = 265.0
-margin_bottom = 205.0
+margin_bottom = 236.0
 text = "Add original amount to remaining"
 
 [node name="CheatMode" type="GridContainer" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1"]
-margin_top = 209.0
+margin_top = 240.0
 margin_right = 265.0
-margin_bottom = 271.0
+margin_bottom = 302.0
 columns = 2
 
 [node name="Add" type="CheckBox" parent="CanvasLayer/Control/VBoxContainer/HBox/Col1/CheatMode"]
